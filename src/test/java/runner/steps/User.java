@@ -25,7 +25,7 @@ public class User {
                 .post(getServiceUrl() + "/user" );
     }
 
-    @When("^a user is serached with id (\\d+)$")
+    @When("^a user is searched with id (\\d+)$")
     public void getUserById(int id) throws Throwable {
         response = RestAssured.given()
                 .log().all()

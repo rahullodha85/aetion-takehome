@@ -33,17 +33,17 @@ Feature: Create/Get/Update user
 
   @user @create-user
   Scenario Outline: Create User with invalid/expired token
-    Given Authtoken is invalid/expired
+    Given Authentication is invalid/expired
     When a user is created with "<email>", "<first_name>", "<last_name>" and <age>
     Then user should get 401 unauthorized response
     Examples:
       | email           | first_name | last_name | age |
       | email@email.com | Steve      | Austin    | 43  |
 
-  @debug @user @get-user
+  @user @get-user
   Scenario Outline: Get User
     Given Authentication token is received
-    When a user is serached with id <id>
+    When a user is searched with id <id>
     Then user response should be received containing "<email>", "<first_name>", "<last_name>" and <age>
     Examples:
       | id    | email                | first_name | last_name     | age |
@@ -69,3 +69,9 @@ Feature: Create/Get/Update user
       | 46860 | chris@ohoph.test     | Chris      | Ingilby       | 31  |
       | 46861 | emily@sopjs.test     | Emily      | Crobak        | 28  |
       | 46862 | maryam@eopjp.test    | Maryam     | Kapur         | 41  |
+
+  @debug @user @create-user
+  Scenario: Get User with invalid/expired token
+    Given Authentication is invalid/expired
+    When a user is searched with id 12345
+    Then user should get 401 unauthorized response

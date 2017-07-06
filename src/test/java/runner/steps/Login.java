@@ -52,7 +52,7 @@ public class Login {
         setAuthToken(response.then().extract().body().path("token"));
     }
 
-    @Given("^Authtoken is invalid/expired$")
+    @Given("^Authentication is invalid/expired$")
     public void setInvalidToken() throws Throwable {
         setAuthToken("invalid-token");
     }

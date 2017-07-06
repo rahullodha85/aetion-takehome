@@ -10,6 +10,7 @@ import runner.common.Base;
 import static helper.Util.getLoginBody;
 import static helper.Util.getServiceUrl;
 import static org.junit.Assert.assertTrue;
+import static runner.common.Base.setAuthToken;
 
 public class Login {
 
@@ -48,6 +49,12 @@ public class Login {
     @Given("^Authentication token is received$")
     public void extractAuthToken() throws Throwable {
         login("rlodha", "rlodha123");
-        Base.setAuthToken(response.then().extract().body().path("token"));
+        setAuthToken(response.then().extract().body().path("token"));
     }
+
+    @Given("^Authtoken is invalid/expired$")
+    public void setInvalidToken() throws Throwable {
+        setAuthToken("invalid-token");
+    }
+
 }

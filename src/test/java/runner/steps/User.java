@@ -25,7 +25,16 @@ public class User {
                 .post(getServiceUrl() + "/user" );
     }
 
-    @Then("^create user response should be received containing \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and (\\d+)$")
+    @When("^a user is serached with id (\\d+)$")
+    public void getUserById(int id) throws Throwable {
+        response = RestAssured.given()
+                .log().all()
+                .header("X-Auth-Token", getAuthToken())
+                .when()
+                .get(getServiceUrl() + "/user/" + id );
+    }
+
+    @Then("^user response should be received containing \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\" and (\\d+)$")
     public void validateCreateUser(String email, String firstName, String lastName, int age) throws Throwable {
         response.then()
                 .log().ifValidationFails()
@@ -35,5 +44,13 @@ public class User {
                 .body("first_name", Matchers.equalTo(firstName))
                 .body("last_name", Matchers.equalTo(lastName))
                 .body("age", Matchers.equalTo(age));
+    }
+
+    @Then("^user should get (\\d+) unauthorized response$")
+    public void verifyInvalidAuthToken(int status) throws Throwable {
+        response.then()
+                .log().ifValidationFails()
+                .assertThat()
+                .statusCode(status);
     }
 }

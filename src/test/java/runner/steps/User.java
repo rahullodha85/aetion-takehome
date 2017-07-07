@@ -5,11 +5,12 @@ import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
-import static helper.Util.getServiceUrl;
-import static helper.Util.getUserRequestBody;
+import static helper.Util.*;
 import static runner.common.Base.getAuthToken;
 
 public class User {
@@ -82,6 +83,30 @@ public class User {
                     .statusCode(200)
                     .body(attribute.toString(), Matchers.equalTo(value));
         }
+    }
+
+    @When("^users are searched for age between (\\d+) and (\\d+)$")
+    public void searchUsers(int startAge, int endAge) throws Throwable {
+        response = RestAssured.given()
+                .log().all()
+                .log().all()
+                .header("content-type", "application/json")
+                .header("X-Auth-Token", getAuthToken())
+                .body(getSearchBody(startAge, endAge))
+                .post(getServiceUrl() + "/user/search");
+    }
+
+    @Then("^users with age between (\\d+) and (\\d+) should be received$")
+    public void validateSearch(int startAge, int endAge) throws Throwable {
+        response.then()
+                .log().ifValidationFails()
+                .assertThat()
+                .statusCode(200);
+        ArrayList<Integer> age = response.then().extract().path("age");
+        age.forEach(a -> {
+            Assert.assertTrue(a >= startAge);
+            Assert.assertTrue(a <= endAge);
+        });
     }
 
     private HashMap changeValues(String attribute, String value) {

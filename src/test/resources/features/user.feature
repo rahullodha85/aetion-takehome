@@ -7,7 +7,6 @@ Feature: Create/Get/Update user
     Then user response should be received containing "<email>", "<first_name>", "<last_name>" and <age>
     Examples:
       | email                | first_name | last_name     | age |
-#      | email@email.com     | Steve       | Austin       | 43  |
       | peta@example.org     | Peta       | Francis       | 34  |
       | george@example.com   | Goerge     | Pearson       | 45  |
       | faye@example.com     | Faye       | Thames        | 42  |
@@ -86,3 +85,15 @@ Feature: Create/Get/Update user
       | 46842 | first_name | Jorge   |
       | 46848 | age        | 38      |
       | 46849 | last_name  | Ankomah |
+
+  @user @search-user
+  Scenario Outline: Search User
+    Given Authentication token is received
+    When users are searched for age between <start-age> and <end-age>
+    Then users with age between <start-age> and <end-age> should be received
+    Examples:
+      | start-age | end-age |
+      | 20        | 40      |
+      | 10        | 15      |
+      # checking for invalid age range
+      | 50        | 40      |

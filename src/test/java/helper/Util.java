@@ -44,4 +44,12 @@ public class Util {
 
         return json.toString();
     }
+
+    public static String getSearchBody(int startAge,int endAge) {
+        JsonObject json = new JsonObject();
+        json.addProperty("start_age", startAge);
+        json.addProperty("end_age", endAge);
+
+        return json.toString();
+    }
 }

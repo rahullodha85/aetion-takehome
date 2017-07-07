@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import static helper.Util.*;
-import static runner.common.Base.getAuthToken;
 
 public class User {
 

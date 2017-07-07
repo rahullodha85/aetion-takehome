@@ -6,10 +6,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static helper.Util.getLoginBody;
-import static helper.Util.getServiceUrl;
+import static helper.Util.*;
 import static org.junit.Assert.assertTrue;
-import static runner.common.Base.setAuthToken;
 
 public class Login {
 

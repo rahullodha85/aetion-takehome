@@ -1,7 +1,7 @@
 Feature: Login
 
   @login
-  Scenario Outline:
+  Scenario Outline: Login smoke checking authentication token in response
     When user login with credentials "<username>" and "<password>"
     Then user should receive a valid login response with authentication token
     Examples:
@@ -9,7 +9,7 @@ Feature: Login
       | rlodha   | rlodha123 |
 
   @login
-  Scenario Outline:
+  Scenario Outline: Login with valid and invalid credentials
     When user login with credentials "<username>" and "<password>"
     Then user should receive http response: <status code>
     Examples:

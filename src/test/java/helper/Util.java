@@ -5,6 +5,12 @@ import com.google.gson.JsonObject;
 import java.util.HashMap;
 
 public class Util {
+    /**
+     * returns a json body as string for login request
+     * @param username
+     * @param password
+     * @return
+     */
     public static String getLoginBody(String username, String password) {
         JsonObject json = new JsonObject();
         json.addProperty("username", username);
@@ -16,10 +22,27 @@ public class Util {
         return "http://qa-takehome.dev.aetion.com:4440";
     }
 
+    /**
+     * return a json body as string for create user request
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param age
+     * @return
+     */
     public static String getUserRequestBody(String email, String firstName, String lastName, int age) {
         return getUserRequestBody(-1, email, firstName, lastName, age);
     }
 
+    /**
+     * returns a json body as string for get user request
+     * @param id
+     * @param email
+     * @param firstName
+     * @param lastName
+     * @param age
+     * @return
+     */
     public static String getUserRequestBody(int id, String email, String firstName, String lastName, int age) {
         JsonObject json = new JsonObject();
         if(id > 0) {
@@ -33,6 +56,11 @@ public class Util {
         return json.toString();
     }
 
+    /**
+     * returns a json body as string for update user request
+     * @param map
+     * @return
+     */
     public static String getUserRequestBody(HashMap<String, Object> map) {
         JsonObject json = new JsonObject();
         for (String key:map.keySet()) {
@@ -45,6 +73,12 @@ public class Util {
         return json.toString();
     }
 
+    /**
+     * returns a json body as string for search user request
+     * @param startAge
+     * @param endAge
+     * @return
+     */
     public static String getSearchBody(int startAge,int endAge) {
         JsonObject json = new JsonObject();
         json.addProperty("start_age", startAge);

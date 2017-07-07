@@ -109,6 +109,12 @@ public class User {
         });
     }
 
+    /**
+     * changes attribute to be updated with new value
+     * @param attribute
+     * @param value
+     * @return
+     */
     private HashMap changeValues(String attribute, String value) {
         HashMap<String, Object> map = response.then().extract().body().jsonPath().getJsonObject("");
         if (map.get(attribute) instanceof Integer) {

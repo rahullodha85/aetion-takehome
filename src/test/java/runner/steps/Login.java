@@ -5,7 +5,6 @@ import com.jayway.restassured.response.Response;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import runner.common.Base;
 
 import static helper.Util.getLoginBody;
 import static helper.Util.getServiceUrl;

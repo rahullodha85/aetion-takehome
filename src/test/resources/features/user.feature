@@ -70,8 +70,19 @@ Feature: Create/Get/Update user
       | 46861 | emily@sopjs.test     | Emily      | Crobak        | 28  |
       | 46862 | maryam@eopjp.test    | Maryam     | Kapur         | 41  |
 
-  @debug @user @create-user
+  @user @get-user
   Scenario: Get User with invalid/expired token
     Given Authentication is invalid/expired
     When a user is searched with id 12345
     Then user should get 401 unauthorized response
+
+  @user @update-user
+  Scenario Outline: Update User
+    Given Authentication token is received
+    When a user with id <id> is updated for field "<attribute>" and value "<value>"
+    Then user response should be received containing "<attribute>" and value "<value>"
+    Examples:
+      | id    | attribute  | value   |
+      | 46842 | first_name | Jorge   |
+      | 46848 | age        | 38      |
+      | 46849 | last_name  | Ankomah |

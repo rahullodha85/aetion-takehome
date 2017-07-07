@@ -2,6 +2,8 @@ package helper;
 
 import com.google.gson.JsonObject;
 
+import java.util.HashMap;
+
 public class Util {
     public static String getLoginBody(String username, String password) {
         JsonObject json = new JsonObject();
@@ -27,6 +29,18 @@ public class Util {
         json.addProperty("first_name", firstName);
         json.addProperty("last_name", lastName);
         json.addProperty("age", age);
+
+        return json.toString();
+    }
+
+    public static String getUserRequestBody(HashMap<String, Object> map) {
+        JsonObject json = new JsonObject();
+        for (String key:map.keySet()) {
+            if(map.get(key) instanceof Integer)
+                json.addProperty(key, (Number)map.get(key));
+            else
+                json.addProperty(key,map.get(key).toString());
+        }
 
         return json.toString();
     }

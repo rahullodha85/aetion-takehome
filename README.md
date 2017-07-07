@@ -18,6 +18,8 @@ Execute tests using `executeTests.sh` script
 5. Update-User Tests: `@update-user`
 6. Search-User Tests: `@search-user`
 
+### Test Repors
+Test report are available under target/html and target/json directories
 
 ### Bugs found during testing
 1. Update user request `/user/{id} PUT` does not update age attribute
